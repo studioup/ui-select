@@ -186,6 +186,7 @@
     ctrl.resetSearchInput = undefined; // Initialized inside uiSelect directive link function
     ctrl.refreshDelay = undefined; // Initialized inside uiSelectChoices directive link function
     ctrl.multiple = false; // Initialized inside uiSelect directive link function
+    ctrl.forcePlaceholder = false;
     ctrl.disableChoiceExpression = undefined; // Initialized inside uiSelect directive link function
     ctrl.tagging = {isActivated: false, fct: undefined};
     ctrl.taggingTokens = {isActivated: false, tokens: undefined};
@@ -513,7 +514,7 @@
 
     ctrl.getPlaceholder = function(){
       //Refactor single?
-      if(ctrl.multiple && ctrl.selected.length) return;
+      if(ctrl.multiple && ctrl.selected.length && !forcePlaceholder) return;
       return ctrl.placeholder;
     };
 
