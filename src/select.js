@@ -186,6 +186,7 @@
     ctrl.resetSearchInput = undefined; // Initialized inside uiSelect directive link function
     ctrl.refreshDelay = undefined; // Initialized inside uiSelectChoices directive link function
     ctrl.multiple = false; // Initialized inside uiSelect directive link function
+    ctrl.forcePlaceholder =  false;
     ctrl.disableChoiceExpression = undefined; // Initialized inside uiSelect directive link function
     ctrl.tagging = {isActivated: false, fct: undefined};
     ctrl.taggingTokens = {isActivated: false, tokens: undefined};
@@ -197,6 +198,11 @@
     ctrl.isEmpty = function() {
       return angular.isUndefined(ctrl.selected) || ctrl.selected === null || ctrl.selected === '';
     };
+    
+    if( $element.attr('force-placeholder') === 'true'){
+        ctrl.forcePlaceholder = true;
+    }
+
 
     var _searchInput = $element.querySelectorAll('input.ui-select-search');
     if (_searchInput.length !== 1) {
@@ -513,7 +519,7 @@
 
     ctrl.getPlaceholder = function(){
       //Refactor single?
-      if(ctrl.multiple && ctrl.selected.length) return;
+      if(ctrl.multiple && ctrl.selected.length && !ctrl.forcePlaceholder ) return;
       return ctrl.placeholder;
     };
 
